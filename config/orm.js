@@ -1,6 +1,15 @@
 connection = require("./connection");
 
 const ORM = {
+showBurgers: function(cb){
+        connection.query('SELECT * FROM burgers;',function(err, data) {
+        if (err) {
+            throw err;
+          };
+       cb(data);
+        })
+},
+
 AddBurger: function(burgerName){
 
 connection.query("INSERT INTO burgers (burgername) VALUES (?);", [burgerName], function(err, result){

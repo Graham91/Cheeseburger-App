@@ -7,7 +7,14 @@ var ORM = require("../config/orm.js");
 
 // Create all our routes and set up logic within those routes where required.
 router.get("/", function(req, res) {
-console.log("hi");
+    ORM.showBurgers(function(data) {
+      let handlebarsObject = {
+        burgers: data
+      };
+      console.log(handlebarsObject);
+        res.render("index", handlebarsObject);
+      });
+
 });
 
 router.get("/api/addburger/:id", function(req, res) {

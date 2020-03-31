@@ -1,5 +1,5 @@
-<h1>Burger<h1>
-
+<h1 id="title">Burgers<h1>
+<div id="left">
 <h2>Uneaten burger!</h2>
 
 <ul>
@@ -9,7 +9,8 @@
     {{/unless}}
   {{/each}}
 </ul>
-
+</div>
+<div id="right">
 <h2>Eaten burger</h2>
 
 <ul>
@@ -19,8 +20,8 @@
     {{/if}}
   {{/each}}
 </ul>
+</div>
 
-<h2>Add burger Cat</h2>
 <form class="burger-form">
 
   <div class="form-group">
@@ -28,5 +29,5 @@
     <input type="text" id="burger" name="name">
   </div>
 
-  <button type="submit">Add burger</button>
+  <button id="bigbutton" type="submit">Add burger</button>
 </form>

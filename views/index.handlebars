@@ -13,9 +13,20 @@
 <h2>Eaten burger</h2>
 
 <ul>
-  {{#each cats}}
-    {{#if sleepy}}
-      {{> cats/cat-block sleep=false}}
+  {{#each burgers}}
+    {{#if devoured}}
+      {{> burger/burger-block devoured=false}}
     {{/if}}
   {{/each}}
 </ul>
+
+<h2>Add burger Cat</h2>
+<form class="burger-form">
+
+  <div class="form-group">
+    <label for="burger"> NEW BURGER:</label>
+    <input type="text" id="burger" name="name">
+  </div>
+
+  <button type="submit">Add burger</button>
+</form>

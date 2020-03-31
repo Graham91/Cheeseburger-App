@@ -1,5 +1,5 @@
 var express = require("express");
-
+let handlebars = require("express-handlebars");
 var router = express.Router();
 
 // Import the model (cat.js) to use its database functions.
@@ -8,39 +8,35 @@ var ORM = require("../config/orm.js");
 // Create all our routes and set up logic within those routes where required.
 router.get("/", function(req, res) {
     ORM.showBurgers(function(data) {
-      let handlebarsObject = {
+      let hbsObject = {
         burgers: data
       };
-      console.log(handlebarsObject);
-        res.render("index", handlebarsObject);
+      console.log(hbsObject);
+      res.render("index", hbsObject);
       });
 
 });
 
-router.get("/api/addburger/:id", function(req, res) {
-    console.log(req.params.id);
-ORM.AddBurger(req.params.id);
+router.post("/api/addburger", function(req, res) {
+    
+ ORM.AddBurger(req.body.name);
+ 
+res.status(200).end();
 });
 
 router.put("/api/updateburger/:id", function(req, res) {
-  var condition = "id = " + req.params.id;
+console.log(req.body.devoured);
 
-  console.log("condition", condition);
+ORM.devourBurger(req.params.id, req.body.devoured);
 
-  cat.update({
-    sleepy: req.body.sleepy
-  }, condition, function(result) {
-    if (result.changedRows == 0) {
-      // If no rows were changed, then the ID must not exist, so 404
-      return res.status(404).end();
-    } else {
-      res.status(200).end();
-    }
-  });
+     res.status(200).end();
+
 });
 
 router.delete("/api/deleteburger/:id", function(req, res){
     let burgernamer = req.params.id;
+    ORM.deleteBurger(burgernamer);
+    res.status(200).end();
 
 })
 

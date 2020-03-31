@@ -20,9 +20,16 @@ console.log(result);
 })
 
 },
-devourBurger: function(burgerName){
-    
-    connection.query("UPDATE burgers SET devoured=1 WHERE burgername='?';",[burgerName], function(err, result){
+devourBurger: function(burgerName, newdev){
+    let datatruefalse;
+    if (newdev == "false"){
+        datatruefalse = 0;
+    }
+    else{
+        datatruefalse = 1;
+    }
+    console.log("datatruefalse="+datatruefalse);
+    connection.query("UPDATE burgers SET devoured=? WHERE id=?;",[datatruefalse, burgerName], function(err, result){
         if (err) {
             throw err;
           }
@@ -32,7 +39,7 @@ devourBurger: function(burgerName){
 },
 deleteBurger: function(burgerName){
 
-    connection.query("DELETE FROM burgers WHERE burgername='?';",[burgerName], function(err, result){
+    connection.query("DELETE FROM burgers WHERE id=?;",[burgerName], function(err, result){
         if (err) {
             throw err;
           }
